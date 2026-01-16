@@ -18,6 +18,10 @@ That is what this phase delivers.
 
 ## Why this project exists
 
+This project is built to demonstrate how a synthetic insurance portfolio
+should be constructed, governed, and validated *before* any pricing,
+fraud, or forecasting models are applied.
+
 In real insurance environments, analytical credibility depends on:
 - reproducibility
 - traceability
