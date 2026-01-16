@@ -1,0 +1,25 @@
+{
+  "dataset_version": "v1.0",
+  "generated_at_utc": "2026-01-12T13:26:26.805740",
+  "generator_entrypoint": "data_gen.cli",
+  "generator_function": "generate_universe",
+  "python_version": "3.10.11",
+  "platform": "Windows-10-10.0.26100-SP0",
+  "seeds": {
+    "universe": 42,
+    "claims": 44,
+    "anomalies": 99
+  },
+  "row_counts": {
+    "macro": 84,
+    "policyholders": 80000,
+    "policies": 120000,
+    "claims": 148907
+  },
+  "file_hashes_sha256": {
+    "macro.csv": "54b90f2fefad5201d36468b3bf33c7f8ce576e76d399756c656311005a4c53b8",
+    "policyholders.csv": "3f43bf8581915879023ea932e004309155aa704e47296ba188b3ba5d046edb83",
+    "policies.csv": "66e911dd7b3ed9a682c5632d71a2898273c56030af9e1d99db1a38e0b4ff490c",
+    "claims.csv": "1aaa58155680db4d8c6545cf5d764cf1e8fb02c50f622065aa28c77603ef6952"
+  }
+}
