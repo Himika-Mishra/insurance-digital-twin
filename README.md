@@ -69,22 +69,35 @@ This mirrors how internal insurance analytics platforms are built.
 ## Repository structure
 
 insurance-digital-twin/
+
 ├── data_gen/
+
 │ ├── config.py # Portfolio assumptions & targets
+
 │ ├── generators.py # Synthetic data generation logic
+
 │ ├── schemas.py # Entity schemas (documentation & typing)
+
 │ └── cli.py # Dataset generation + freeze entry point
+
 │
+
 ├── data/
+
 │ └── raw/
+
 │ └── dataset_manifest.json # Dataset hashes + metadata
+
 │
 ├── notebooks/
-│ ├── 00_data_gen_validation.ipynb
-│ └── 01_eda_frozen_synthetic_universe.ipynb
-│
-└── README.md
 
+│ ├── 00_data_gen_validation.ipynb
+
+│ └── 01_eda_frozen_synthetic_universe.ipynb
+
+│
+
+└── README.md
 
 ---
 
@@ -92,4 +105,9 @@ insurance-digital-twin/
 
 ```bash
 python -m data_gen.cli
+```
 
+---
+
+**Latest stable release:**  
+**v0.1 — Dataset Freeze & Governance**
