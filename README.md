@@ -120,9 +120,11 @@ python -m data_gen.cli
 
 ---
 
-**Latest stable releases:**  
+## **Latest stable releases:**  
+
 **v0.1 — Dataset Freeze & Governance**
+
 **v0.2 — Dataset Freeze & Governance**
-=======
+
 
 
