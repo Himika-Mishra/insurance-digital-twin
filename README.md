@@ -105,13 +105,27 @@ insurance-digital-twin/
 
 ---
 
-## How to run (Phase 1)
+## How to run (Phase 2 — Pricing Context)
+
+Phase 2 builds on the **frozen dataset generated in Phase 1**.
+No data is regenerated or modified in this phase.
+
+### Prerequisite
+Ensure Phase 1 has been executed and the dataset is frozen:
 
 ```bash
 python -m data_gen.cli
 ```
 
+<<<<<<< HEAD
 ---
 
 **Latest stable release:**  
 **v0.1 — Dataset Freeze & Governance**
+=======
+
+---
+
+**Latest stable release:**  
+**v0.2 — Dataset Freeze & Governance**
+>>>>>>> 09fa27a (v0.2 — portfolio mix & premium pricing context)
