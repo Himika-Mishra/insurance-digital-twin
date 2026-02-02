@@ -218,7 +218,13 @@ Open and run:
 
 - notebooks/02_portfolio_mix_premium_pricing_context.ipynb
 
-⚠️ Phase 2 **does not regenerate data.**
+**Phase 3 — Loss Ratio Drill-Down**
+
+Open and run:
+
+- notebooks/03_loss_ratio_drilldown_actuarial.ipynb
+
+⚠️ Phase 2 & 3 **does not regenerate data.**
 
 It consumes the frozen outputs from Phase 1.
 
