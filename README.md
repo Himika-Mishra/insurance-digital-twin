@@ -264,6 +264,12 @@ insurance-digital-twin/
 
 │ └── 03_loss_ratio_drilldown_actuarial.ipynb
 
+│ ├── 04_macro_cat_sensitivity.ipynb  
+
+│ └── ui/  
+
+│     └── scenario_simulator_exec_demo.py  
+
 │
 
 └── README.md
