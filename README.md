@@ -126,7 +126,83 @@ Loss ratios are treated as **decision signals**, not just summary metrics.
 ✔ Premium-weighted aggregation (financial materiality lens)  
 ✔ Product × Channel loss ratio heatmap (executive view)  
 ✔ Clear separation of **diagnosis** vs **modelling**  
-✔ Explicit decision framing for pricing and portfolio steering  
+✔ Explicit decision framing for pricing and portfolio steering 
+
+## Phase 4 — Macro & CAT Scenario Sensitivity (Board View) (v0.4)
+
+Phase 4 extends the digital twin from *diagnosis* into **forward-looking stress testing
+and executive decision support**.
+
+This phase introduces a **scenario engine** that translates macroeconomic shocks and
+catastrophe events into portfolio-level paid loss impacts — both **gross** and **net of reinsurance**.
+
+The focus is **not forecasting**.
+It is understanding *exposure, sensitivity, and protection effectiveness* under stress.
+
+---
+
+### Key questions answered
+
+- How sensitive is the portfolio to **inflation, repair costs, unemployment, and CAT events**?
+- Which scenarios produce **material paid-loss uplift**?
+- Which products **drive the stress impact**?
+- How much risk is **absorbed by reinsurance**, and how much remains net?
+- Where does residual risk concentrate *after* QS + XL protection?
+
+---
+
+### Key outputs
+
+✔ Scenario engine driven by macro and CAT shocks  
+✔ Portfolio-level paid loss impact (gross view)  
+✔ Product-level attribution of scenario uplift  
+✔ Bootstrap uncertainty bands for key stresses  
+✔ **Reinsurance effectiveness analysis (QS + XL)**  
+✔ Executive-ready board packs (PPT)  
+✔ **Interactive Streamlit scenario simulator** for live decision exploration  
+
+---
+
+### Board artefacts
+
+- `04_board_scenario_pack.pptx`  
+  *Gross portfolio impact under macro & CAT scenarios*
+
+- `04_board_scenario_pack_with_RI.pptx`  
+  *Gross → Net view with QS + XL reinsurance protection*
+
+These decks are structured for **pricing, underwriting, and reinsurance committees**,
+not exploratory analysis.
+
+---
+
+### Executive simulator (Streamlit)
+
+This phase also introduces an **interactive executive scenario tool**.
+
+Features:
+- Live sliders for:
+  - Inflation shock
+  - Repair cost shock
+  - Unemployment shift
+  - CAT year override
+- Reinsurance structure controls:
+  - Quota share %
+  - XL retention
+  - XL limit
+- Instant visibility of:
+  - Gross paid loss
+  - Net paid loss after RI
+  - Risk transfer efficiency
+  - Product-level attribution
+
+Location:
+- `notebooks/ui/scenario_simulator_exec_demo.py`
+
+Purpose:
+> Convert static board analysis into a **live decision conversation**.
+
+---
 
 ### Notebooks
 
@@ -135,30 +211,24 @@ Loss ratios are treated as **decision signals**, not just summary metrics.
 - `02_portfolio_mix_premium_pricing_context.ipynb` — pricing context on frozen data
 - `03_loss_ratio_drilldown_actuarial.ipynb` —  Actuarial loss ratio drill-down using earned premium logic, with
   executive-ready visualisation and governance anchoring.
-
-This phase establishes a **defensible baseline** for:
-- loss ratio drill-downs
-- downstream actuarial GLM / NB modelling
-- pricing uplift estimation
-- fraud and scenario modelling
+- `04_macro_cat_sensitivity.ipynb` —  
+  Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
 
 ### Why this matters
 
-Loss ratios sit at the intersection of:
-- pricing adequacy
-- underwriting selection
-- claims behaviour
-- portfolio mix
+At board level, the question is rarely:
+> “What is the loss ratio?”
 
-This phase ensures that downstream modelling is:
-- **targeted** (focused where money is at risk)
-- **explainable** (frequency vs severity intuition)
-- **defensible** (built on frozen, governed data)
+It is:
+> **What happens under stress, where does the money go, and how protected are we?**
 
-This analysis directly informs:
-- pricing review priorities
-- underwriting appetite by channel
-- reinsurance and portfolio steering discussions
+Phase 4 connects:
+- actuarial structure
+- macro stress
+- reinsurance economics
+- executive decision framing
+
+All built on **frozen, governed data** from Phase 1.
 
 ---
 
@@ -226,7 +296,23 @@ Open and run:
 
 ⚠️ Phase 2 & 3 **does not regenerate data.**
 
-It consumes the frozen outputs from Phase 1.
+Open and run:
+
+- notebooks/03_loss_ratio_drilldown_actuarial.ipynb
+
+**Phase 4 — Macro & CAT Scenario Sensitivity (Board View)**
+
+Open and run:
+
+- notebooks/04_macro_cat_sensitivity.ipynb
+
+(Optional interactive demo)
+
+- notebooks/ui/scenario_simulator_exec_demo.py
+
+⚠️ Phase 2, 3 & 4 **do not regenerate data.**
+
+They consume the frozen outputs from Phase 1.
 
 ---
 
@@ -242,13 +328,22 @@ It consumes the frozen outputs from Phase 1.
   Earned premium–based loss ratio analysis with product × channel drill-down
   and executive-ready visualisation.
 
+- **v0.4 — Macro & CAT Scenario Sensitivity (Board View)**  
+  Scenario engine, board packs, reinsurance effectiveness, and executive simulator.
+
 ---
 
 ## **What’s next**
 
-**v0.4 — Frequency vs Severity Decomposition**
+**v0.5 — Anomaly Audit & Model Robustness**
 
-Decomposing loss ratios into claim frequency and claim severity drivers
-to explain *why* similar loss ratios behave differently under stress
-and to prepare the ground for actuarial modelling.
+Controlled “real-world messiness” diagnostics:
+- negative paid
+- zero premiums
+- late repudiations
+- process artefacts
 
+Ensuring downstream models remain:
+- stable
+- explainable
+- production-safe
