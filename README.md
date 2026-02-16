@@ -204,6 +204,66 @@ Purpose:
 
 ---
 
+## Phase 5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate) (v0.5)
+
+Phase 5 introduces a formal modelling-readiness certification layer on top of the frozen synthetic portfolio.
+
+This phase does not fit predictive models.
+
+Instead, it validates that the portfolio is structurally and statistically ready
+for controlled frequency modelling in the next phase.
+
+In regulated insurance environments, predictive modelling does not begin
+until exposure integrity, anomaly bounds, and distributional assumptions
+have been formally validated.
+
+Phase 5 mirrors that discipline.
+
+---
+
+### Key questions answered
+
+- Is exposure derived correctly and free from structural inconsistencies?
+- Are anomalies rare, bounded, and explainable?
+- Does claim count exhibit statistically significant overdispersion?
+- Is Negative Binomial GLM justified over Poisson?
+- Is meaningful risk signal present across rating factors?
+- Is temporal leakage prevented before model fitting?
+
+---
+
+### Key outputs
+
+✔ Exposure derivation from policy start and end dates
+✔ Detection and controlled handling of non-positive exposure cases (~0.1%)
+✔ Poisson dispersion testing (Pearson χ² / dof ≈ 88)
+✔ Formal justification for Negative Binomial frequency modelling
+✔ Risk signal validation across rating dimensions (e.g. vehicle_age)
+✔ Fraud-like structural clustering diagnostics
+✔ Temporal train/test split to prevent forward-looking bias
+✔ Phase 5 modelling-readiness certification
+
+---
+
+### Why this matters
+
+Before fitting a GLM, pricing teams must ensure:
+
+- exposure is structurally consistent
+
+- statistical assumptions are defensible
+
+- risk differentiation exists in the data
+
+- modelling pipelines are leakage-safe
+
+Phase 5 ensures that the portfolio is not only analytically interesting,
+but statistically and procedurally ready for predictive modelling.
+
+This phase marks the transition from:
+
+**Descriptive portfolio analytics → Controlled actuarial modelling**
+
 ### Notebooks
 
 - `00_data_gen_validation.ipynb` — generator sanity checks & governance gates  
@@ -211,22 +271,27 @@ Purpose:
 - `02_portfolio_mix_premium_pricing_context.ipynb` — pricing context on frozen data
 - `03_loss_ratio_drilldown_actuarial.ipynb` —  Actuarial loss ratio drill-down using earned premium logic, with
   executive-ready visualisation and governance anchoring.
-- `04_macro_cat_sensitivity.ipynb` —  
-  Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
+- `04_macro_cat_sensitivity.ipynb` — Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
+- 05_anomaly_audit_and_model_robustness.ipynb - Exposure validation, anomaly diagnostics, dispersion testing, risk signal stability checks, and modelling-readiness certification.
 
 ### Why this matters
 
-At board level, the question is rarely:
-> “What is the loss ratio?”
+Before fitting a GLM, pricing teams must ensure:
 
-It is:
-> **What happens under stress, where does the money go, and how protected are we?**
+- exposure is structurally consistent
 
-Phase 4 connects:
-- actuarial structure
-- macro stress
-- reinsurance economics
-- executive decision framing
+- statistical assumptions are defensible
+
+- risk differentiation exists in the data
+
+- modelling pipelines are leakage-safe
+
+Phase 5 ensures that the portfolio is not only analytically interesting,
+but statistically and procedurally ready for predictive modelling.
+
+This phase marks the transition from:
+
+**Descriptive portfolio analytics → Controlled actuarial modelling**
 
 All built on **frozen, governed data** from Phase 1.
 
@@ -270,7 +335,7 @@ insurance-digital-twin/
 
 │     └── scenario_simulator_exec_demo.py  
 
-│
+│ └── 05_anomaly_audit_and_model_robustness.ipynb
 
 └── README.md
 
@@ -300,12 +365,6 @@ Open and run:
 
 - notebooks/03_loss_ratio_drilldown_actuarial.ipynb
 
-⚠️ Phase 2 & 3 **does not regenerate data.**
-
-Open and run:
-
-- notebooks/03_loss_ratio_drilldown_actuarial.ipynb
-
 **Phase 4 — Macro & CAT Scenario Sensitivity (Board View)**
 
 Open and run:
@@ -316,10 +375,15 @@ Open and run:
 
 - notebooks/ui/scenario_simulator_exec_demo.py
 
-⚠️ Phase 2, 3 & 4 **do not regenerate data.**
-
 They consume the frozen outputs from Phase 1.
 
+**Phase 5 - Anomaly Audit & Model Robustness (Modelling Readiness Gate)**
+
+Open and run:
+
+- notebooks/05_anomaly_audit_and_model_robustness.ipynb
+
+⚠️ Phase 2, 3, 4 & 5 **do not regenerate data.**
 ---
 
 ## **Releases:**  
@@ -337,19 +401,17 @@ They consume the frozen outputs from Phase 1.
 - **v0.4 — Macro & CAT Scenario Sensitivity (Board View)**  
   Scenario engine, board packs, reinsurance effectiveness, and executive simulator.
 
+- **v0.5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate)**
+  Portfolio statistically validated and certified for NB GLM frequency modelling.
+
 ---
 
 ## **What’s next**
 
-**v0.5 — Anomaly Audit & Model Robustness**
+**v0.6 — Frequency Model (Negative Binomial GLM)**
 
-Controlled “real-world messiness” diagnostics:
-- negative paid
-- zero premiums
-- late repudiations
-- process artefacts
-
-Ensuring downstream models remain:
-- stable
-- explainable
-- production-safe
+- Policy-level claim count modelling
+- log(exposure) offset inclusion
+- Rating relativities extraction
+- Calibration and decile lift analysis
+- Executive-ready modelling summary
