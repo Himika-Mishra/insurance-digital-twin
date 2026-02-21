@@ -234,14 +234,14 @@ Phase 5 mirrors that discipline.
 
 ### Key outputs
 
-✔ Exposure derivation from policy start and end dates
-✔ Detection and controlled handling of non-positive exposure cases (~0.1%)
-✔ Poisson dispersion testing (Pearson χ² / dof ≈ 88)
-✔ Formal justification for Negative Binomial frequency modelling
-✔ Risk signal validation across rating dimensions (e.g. vehicle_age)
-✔ Fraud-like structural clustering diagnostics
-✔ Temporal train/test split to prevent forward-looking bias
-✔ Phase 5 modelling-readiness certification
+✔ Exposure derivation from policy start and end dates  
+✔ Detection and controlled handling of non-positive exposure cases (~0.1%)  
+✔ Poisson dispersion testing (Pearson χ² / dof ≈ 88)  
+✔ Formal justification for Negative Binomial frequency modelling  
+✔ Risk signal validation across rating dimensions (e.g. vehicle_age)  
+✔ Fraud-like structural clustering diagnostics  
+✔ Temporal train/test split to prevent forward-looking bias  
+✔ Phase 5 modelling-readiness certification  
 
 ---
 
@@ -291,14 +291,14 @@ This phase mirrors how regulated pricing teams formally introduce predictive mod
 
 ### Key outputs
 
-✔ Negative Binomial GLM with log(exposure) offset
-✔ Formal overdispersion validation (Poisson vs NB comparison)
-✔ Fraud excluded from technical frequency base
-✔ Temporal train/test split to prevent leakage
-✔ Decile calibration and ~4.3× lift validation
-✔ Vehicle age banding with monotonicity checks
-✔ Structured pricing relativities (exp(beta))
-✔ Exported deployment-ready artefacts
+✔ Negative Binomial GLM with log(exposure) offset  
+✔ Formal overdispersion validation (Poisson vs NB comparison)  
+✔ Fraud excluded from technical frequency base  
+✔ Temporal train/test split to prevent leakage  
+✔ Decile calibration and ~4.3× lift validation  
+✔ Vehicle age banding with monotonicity checks  
+✔ Structured pricing relativities (exp(beta))  
+✔ Exported deployment-ready artefacts  
 
 ---
 
