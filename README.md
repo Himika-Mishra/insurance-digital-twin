@@ -250,19 +250,101 @@ Phase 5 mirrors that discipline.
 Before fitting a GLM, pricing teams must ensure:
 
 - exposure is structurally consistent
-
 - statistical assumptions are defensible
-
 - risk differentiation exists in the data
-
 - modelling pipelines are leakage-safe
 
 Phase 5 ensures that the portfolio is not only analytically interesting,
 but statistically and procedurally ready for predictive modelling.
 
-This phase marks the transition from:
+---
 
-**Descriptive portfolio analytics → Controlled actuarial modelling**
+## Phase 6 — Technical Frequency Model (Negative Binomial GLM) (v0.6)
+
+Phase 6 introduces the first predictive modelling layer within the governed digital twin architecture.
+
+This phase implements a Negative Binomial (NB2) claim frequency model, transitioning the project from modelling-readiness certification (Phase 5) into structured actuarial modelling.
+
+The objective is not simply to fit a model.
+
+It is to recover structured risk signal in a way that is:
+
+- statistically defensible
+- leakage-safe
+- commercially interpretable
+- deployable as rating factors
+
+This phase mirrors how regulated pricing teams formally introduce predictive modelling into a governed environment.
+
+---
+
+### Key questions answered
+
+- Is Negative Binomial statistically justified over Poisson?
+- Does the portfolio exhibit recoverable and stable risk differentiation?
+- Can claim frequency be modelled per policy-year using exposure offsets?
+- Is fraud correctly separated from the technical pricing base?
+- Does the model demonstrate out-of-sample calibration and lift?
+- Are rating relativities implementable and stable?
+
+---
+
+### Key outputs
+
+✔ Negative Binomial GLM with log(exposure) offset
+✔ Formal overdispersion validation (Poisson vs NB comparison)
+✔ Fraud excluded from technical frequency base
+✔ Temporal train/test split to prevent leakage
+✔ Decile calibration and ~4.3× lift validation
+✔ Vehicle age banding with monotonicity checks
+✔ Structured pricing relativities (exp(beta))
+✔ Exported deployment-ready artefacts
+
+---
+
+### Statistical validation
+
+The portfolio exhibits statistically significant overdispersion, formally justifying the NB2 distribution.
+
+The model demonstrates:
+- Strong out-of-sample risk separation
+- Stable predicted means across train/test
+- Calibration consistency across deciles
+- Economically interpretable segmentation
+Primary frequency drivers:
+- Product type (dominant differentiator)
+- Channel
+- Vehicle age bands
+
+---
+
+### Export artefacts
+
+Phase 6 produces structured outputs under: `outputs/phase6/`
+
+- `relativities_product.csv`
+- `relativities_channel.csv`
+- `relativities_vehicle_age_band.csv`
+- `phase6_exec_metrics.json`
+
+These artefacts mirror internal pricing workflows, where modelling outputs are converted into rating-engine-ready factors rather than remaining notebook-bound.
+
+---
+
+### Why this matters
+
+Phase 6 marks the transition from:
+
+**Modelling readiness → Certified predictive pricing layer**
+
+The digital twin now contains:
+- A distributionally justified frequency model
+- Governance-aligned exposure specification
+- Leakage-safe validation structure
+- Deployable rating relativities
+- All built on the frozen and validated dataset from Phase 1.
+
+---
 
 ### Notebooks
 
@@ -272,24 +354,8 @@ This phase marks the transition from:
 - `03_loss_ratio_drilldown_actuarial.ipynb` —  Actuarial loss ratio drill-down using earned premium logic, with
   executive-ready visualisation and governance anchoring.
 - `04_macro_cat_sensitivity.ipynb` — Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
-- 05_anomaly_audit_and_model_robustness.ipynb - Exposure validation, anomaly diagnostics, dispersion testing, risk signal stability checks, and modelling-readiness certification.
-
-### Why this matters
-
-Before fitting a GLM, pricing teams must ensure:
-
-- exposure is structurally consistent
-
-- statistical assumptions are defensible
-
-- risk differentiation exists in the data
-
-- modelling pipelines are leakage-safe
-
-Phase 5 ensures that the portfolio is not only analytically interesting,
-but statistically and procedurally ready for predictive modelling.
-
-This phase marks the transition from:
+- `05_anomaly_audit_and_model_robustness.ipynb` — Exposure validation, anomaly diagnostics, dispersion testing, risk signal stability checks, and modelling-readiness certification.
+- `06_frequency_model_nb_glm_risk_signal_recovery.ipynb` — Negative Binomial frequency model with exposure offset, calibration, lift validation, monotonicity audit, and pricing-ready relativities export.
 
 **Descriptive portfolio analytics → Controlled actuarial modelling**
 
@@ -337,6 +403,8 @@ insurance-digital-twin/
 
 │ └── 05_anomaly_audit_and_model_robustness.ipynb
 
+│ └── 06_frequency_model_nb_glm_risk_signal_recovery.ipynb
+
 └── README.md
 
 
@@ -383,7 +451,13 @@ Open and run:
 
 - notebooks/05_anomaly_audit_and_model_robustness.ipynb
 
-⚠️ Phase 2, 3, 4 & 5 **do not regenerate data.**
+**Phase 6 - Technical Frequency Model (NB GLM)**
+
+Open and run:
+
+- notebooks/06_frequency_model_nb_glm_risk_signal_recovery.ipynb
+
+⚠️ Phase 2, 3, 4, 5 & 6 **do not regenerate data.**
 ---
 
 ## **Releases:**  
@@ -404,14 +478,18 @@ Open and run:
 - **v0.5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate)**
   Portfolio statistically validated and certified for NB GLM frequency modelling.
 
+- **v0.6 — Technical Frequency Model (NB GLM)**  
+  Governance-aligned Negative Binomial frequency modelling with exposure offset,
+  decile calibration, lift validation, and deployable pricing relativities.
+
 ---
 
 ## **What’s next**
 
-**v0.6 — Frequency Model (Negative Binomial GLM)**
+**v0.7 — Fraud Model (Lift + Ring Detection)**
 
-- Policy-level claim count modelling
-- log(exposure) offset inclusion
-- Rating relativities extraction
-- Calibration and decile lift analysis
-- Executive-ready modelling summary
+- Fraud propensity modelling  
+- Ring detection via structural clustering  
+- Fraud lift evaluation  
+- Separation of pricing and fraud overlays  
+- Fraud-adjusted scenario integration
