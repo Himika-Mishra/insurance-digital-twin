@@ -346,6 +346,146 @@ The digital twin now contains:
 
 ---
 
+## Phase 7 — Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning) (v0.7)
+
+Phase 7 introduces the fraud analytics control layer within the Insurance Portfolio Digital Twin.
+
+This phase does not treat fraud as a standalone classification exercise.
+
+Instead, it implements a governance-aligned fraud overlay architecture that mirrors how regulated insurers operationalise fraud detection alongside pricing.
+
+The objective is not simply to maximise AUC.
+
+It is to:
+
+- detect structured fraud signal
+- separate pricing from fraud risk
+- optimise review decisions economically
+- validate structural robustness
+- introduce monitoring discipline
+
+This phase formally introduces a fraud control layer on top of the pricing architecture established in Phase 6.
+
+---
+
+### Key questions answered
+
+- Can fraud propensity be modelled in a leakage-safe manner?
+- Does the portfolio exhibit recoverable fraud signal?
+- Is structural ring behaviour detectable and economically meaningful?
+- How much fraud value can SIU capture under capacity constraints?
+- What review threshold maximises net economic benefit?
+- Is the fraud model stable and explainable under governance standards?
+
+---
+
+### Key components introduced
+
+#### 1️⃣ Fraud Propensity Model
+
+✔ Regularised Logistic Regression  
+✔ Temporal holdout validation  
+✔ Cross-validated isotonic calibration  
+✔ ROC-AUC ≈ 0.82  
+✔ PR-AUC validation for imbalanced data  
+✔ Baseline lift ≈ 39× (top vs bottom decile)
+
+Fraud is modelled independently from the technical pricing layer, preserving structural separation between pricing risk and fraud risk.
+
+---
+
+#### 2️⃣ Structural Ring Detection & Overlay
+
+✔ Ring-level clustering diagnostics  
+✔ Fraud ratio estimation at ring level  
+✔ Overlay integration (propensity + ring signal)  
+✔ Overlay lift ≈ 134×  
+✔ Shuffle validation (overlay robustness test)
+
+This confirms that overlay performance is structural rather than accidental or leakage-driven.
+
+---
+
+#### 3️⃣ Cost-Weighted Triage (SIU Decision Layer)
+
+Fraud scoring is extended into operational decisioning.
+
+Introduced:
+
+✔ Expected fraud loss estimation (paid + reserve proxy)  
+✔ Review cost incorporation  
+✔ Capacity simulation (review top X%)  
+✔ Net economic value estimation  
+✔ Threshold optimisation via EVR (Expected Value of Review)
+
+This transforms fraud modelling from predictive ranking into capital allocation logic.
+
+---
+
+#### 4️⃣ EVR Sensitivity Analysis
+
+✔ Recovery-rate sensitivity testing  
+✔ Net value variation across assumptions  
+✔ Robustness validation of threshold policy
+
+Ensures that review strategy remains economically defensible under varying recovery conditions.
+
+---
+
+#### 5️⃣ Drift Monitoring & Alerts
+
+✔ PSI-based fraud score monitoring  
+✔ Governance thresholds (warning / critical)  
+✔ Retraining trigger signalling
+
+Establishes first-pass model monitoring discipline consistent with production environments.
+
+---
+
+#### 6️⃣ Interpretability Pack (SHAP)
+
+✔ Global SHAP feature importance  
+✔ Post-encoding feature name preservation  
+✔ Ranked importance export
+
+Supports model risk governance and executive transparency.
+
+---
+
+### Export artefacts
+
+Phase 7 produces structured outputs under: `outputs/phase7/`
+
+- `phase7_claim_scores_test.csv`
+- `phase7_ring_summary.csv`
+- `phase7_siu_capacity_table.csv`
+- `phase7_siu_cost_capacity_table.csv`
+- `phase7_siu_threshold_policy_table.csv`
+- `phase7_exec_metrics.json`
+
+These artefacts mirror internal fraud governance workflows where scoring outputs are translated into operational policy tables.
+
+---
+
+### Why this matters
+
+In regulated insurance environments, fraud modelling must answer:
+
+- Who should be reviewed?
+- How many claims can be reviewed?
+- What is the net economic value?
+- Is the signal structurally defensible?
+- Is the model stable under drift?
+- Is it explainable to governance committees?
+
+Phase 7 embeds fraud detection as a controlled overlay within the digital twin architecture.
+
+This marks the transition from:
+
+**Predictive modelling → Operational fraud control framework**
+
+---
+
 ### Notebooks
 
 - `00_data_gen_validation.ipynb` — generator sanity checks & governance gates  
@@ -356,8 +496,10 @@ The digital twin now contains:
 - `04_macro_cat_sensitivity.ipynb` — Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
 - `05_anomaly_audit_and_model_robustness.ipynb` — Exposure validation, anomaly diagnostics, dispersion testing, risk signal stability checks, and modelling-readiness certification.
 - `06_frequency_model_nb_glm_risk_signal_recovery.ipynb` — Negative Binomial frequency model with exposure offset, calibration, lift validation, monotonicity audit, and pricing-ready relativities export.
-
-**Descriptive portfolio analytics → Controlled actuarial modelling**
+- `07_fraud_model_overlay_and_ring_detection.ipynb` —  
+  Fraud propensity modelling, cross-validated calibration, lift analysis,
+  ring overlay integration, EVR optimisation, SIU capacity simulation,
+  drift monitoring, SHAP interpretability, and governance export pack.
 
 All built on **frozen, governed data** from Phase 1.
 
@@ -404,6 +546,8 @@ insurance-digital-twin/
 │ └── 05_anomaly_audit_and_model_robustness.ipynb
 
 │ └── 06_frequency_model_nb_glm_risk_signal_recovery.ipynb
+
+│ └── 07_fraud_model_overlay_and_ring_detection.ipynb
 
 └── README.md
 
@@ -457,39 +601,33 @@ Open and run:
 
 - notebooks/06_frequency_model_nb_glm_risk_signal_recovery.ipynb
 
-⚠️ Phase 2, 3, 4, 5 & 6 **do not regenerate data.**
+**Phase 6 - Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning)**
+
+Open and run:
+
+- notebooks/07_fraud_model_overlay_and_ring_detection.ipynb
+
+⚠️ Phase 2, 3, 4, 5, 6 & 7 **do not regenerate data.**
 ---
 
-## **Releases:**  
+## Releases
 
-- **v0.1 — Dataset Freeze & Governance**  
-  Frozen synthetic insurance universe with validation gates and manifest.
-
-- **v0.2 — Portfolio Mix & Premium Distributions (Pricing Context)**  
-  Pricing context analysis on frozen data: mix, dispersion, concentration, and steering insights.
-
-- **v0.3 — Loss Ratio Drill-Down (Actuarial View)**  
-  Earned premium–based loss ratio analysis with product × channel drill-down
-  and executive-ready visualisation.
-
-- **v0.4 — Macro & CAT Scenario Sensitivity (Board View)**  
-  Scenario engine, board packs, reinsurance effectiveness, and executive simulator.
-
-- **v0.5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate)**
-  Portfolio statistically validated and certified for NB GLM frequency modelling.
-
-- **v0.6 — Technical Frequency Model (NB GLM)**  
-  Governance-aligned Negative Binomial frequency modelling with exposure offset,
-  decile calibration, lift validation, and deployable pricing relativities.
+- **v0.1 — Dataset Freeze & Governance**
+- **v0.2 — Portfolio Mix & Pricing Context**
+- **v0.3 — Loss Ratio Drill-Down**
+- **v0.4 — Macro & CAT Sensitivity**
+- **v0.5 — Anomaly Audit & Modelling Readiness**
+- **v0.6 — Technical Frequency Model (NB GLM)**
+- **v0.7 — Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning)**
 
 ---
 
 ## **What’s next**
 
-**v0.7 — Fraud Model (Lift + Ring Detection)**
+**v0.8 — Scenario Simulator (Inflation Shock + Capital Stress Layer)**
 
-- Fraud propensity modelling  
-- Ring detection via structural clustering  
-- Fraud lift evaluation  
-- Separation of pricing and fraud overlays  
-- Fraud-adjusted scenario integration
+- Inflation shock sliders  
+- Frequency + severity stress propagation  
+- Fraud-adjusted stress view  
+- Gross → net capital translation  
+- Executive auto-summary integration
