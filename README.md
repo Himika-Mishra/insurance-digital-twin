@@ -3,38 +3,81 @@
 Synthetic personal-lines insurance portfolio built as a **governed digital twin**,  
 with dataset freezing, validation gates, and actuarial realism.
 
-This repository evolves in **phases**, each adding analytical depth while preserving
+This repository evolves in **phases**, each adding analytical depth while preserving  
 governance, reproducibility, and auditability.
 
-Designed to mirror how regulated insurance analytics platforms are built internally,
+Designed to mirror how **regulated insurance analytics platforms** are built internally,  
 rather than how public modelling demos are typically presented.
 
 ---
 
-## Project Phases
+## Key Capabilities
 
-This project is structured as a **multi-phase insurance analytics build**, where each
-phase produces a stable, defensible artefact before moving forward.
+This project implements an end-to-end **insurance portfolio analytics stack**, including:
+
+- Synthetic portfolio generation with governance controls
+- Actuarial loss ratio diagnostics
+- Negative Binomial frequency modelling
+- Fraud detection overlay with operational triage optimisation
+- Macro & catastrophe scenario stress testing
+- Stochastic portfolio loss simulation
+- Capital stress modelling (99.5% solvency proxy)
+- Catastrophe-style exceedance probability (EP) curves
+- Pricing response simulation with demand elasticity
+
+The system is designed to mimic how **pricing, fraud, and risk analytics operate together inside an insurer**.
 
 ---
 
-## Phase 1 — Synthetic Insurance Universe & Governance (v0.1)
+## Digital Twin Architecture
 
-The focus of Phase 1 is **not modelling** —  
-it is **data generation, governance, validation, and auditability**.
+The project evolves through a governed analytics pipeline:
 
-Before pricing, fraud, forecasting, or scenario analysis can be trusted,  
-the underlying dataset must be **frozen, reproducible, and defensible**.
+Synthetic Portfolio  
+↓  
+Governance & Dataset Freeze  
+↓  
+Portfolio Diagnostics  
+↓  
+Actuarial Loss Ratio Analysis  
+↓  
+Frequency Modelling (NB GLM)  
+↓  
+Fraud Detection Overlay  
+↓  
+Scenario Stress Engine  
+↓  
+Stochastic Portfolio Simulation  
+↓  
+Capital & Tail Risk Analysis  
+↓  
+Pricing Strategy Simulation
+
+---
+
+# Project Phases
+
+This project is structured as a **multi-phase insurance analytics build**, where each  
+phase produces a **stable, defensible artefact** before moving forward.
+
+---
+
+# Phase 1 — Synthetic Insurance Universe & Governance (v0.1)
+
+The focus of Phase 1 is **not modelling** — it is **data generation, governance, validation, and auditability**.
+
+Before pricing, fraud, forecasting, or scenario analysis can be trusted, the underlying dataset must be **frozen, reproducible, and defensible**.
 
 That is what Phase 1 delivers.
 
 ### Why this project exists
 
 In real insurance environments, analytical credibility depends on:
-- reproducibility
-- traceability
-- controlled imperfections
-- governance before modelling
+
+- reproducibility  
+- traceability  
+- controlled imperfections  
+- governance before modelling  
 
 Most public analytics projects skip these steps.
 
@@ -42,281 +85,113 @@ This project does not.
 
 ### Phase 1 scope
 
-**Delivered in this repository:**
+**Delivered in this repository**
 
-✔ Synthetic personal-lines insurance universe  
-✔ Policyholders, policies, claims, macro environment  
-✔ Explicit modelling assumptions (documented in `config.py`)  
-✔ Controlled anomaly injection (real-world messiness)  
-✔ Validation gates (actuarial sanity checks)  
-✔ Dataset freeze with manifest and cryptographic hashes  
-✔ Auditable, versioned data artefact  
+- Synthetic personal-lines insurance universe  
+- Policyholders, policies, claims, macro environment  
+- Explicit modelling assumptions (`config.py`)  
+- Controlled anomaly injection  
+- Validation gates (actuarial sanity checks)  
+- Dataset freeze with cryptographic manifest  
+- Auditable versioned dataset artefact  
 
-**Explicitly not included yet:**
-- pricing models
-- fraud models
-- scenario simulators
-- dashboards or UI
+**Explicitly not included yet**
 
-These are added incrementally in later phases.
+- pricing models  
+- fraud models  
+- scenario simulators  
+- dashboards  
 
-### What makes this different
-
-This repository treats synthetic data as a **governed asset**, not a toy dataset.
-
-It includes:
-- deterministic generation via fixed random seeds
-- hash-based dataset locking
-- validation checks aligned to actuarial practice
-- anomaly rates that are intentional, rare, and bounded
-
-This mirrors how internal insurance analytics platforms are built.
+These are introduced progressively in later phases.
 
 ---
 
-## Phase 2 — Portfolio Mix & Premium Distributions (Pricing Context) (v0.2)
+# Phase 2 — Portfolio Mix & Premium Distributions (Pricing Context) (v0.2)
 
 Phase 2 builds **pricing context** on top of the frozen dataset produced in Phase 1.
 
-No data is regenerated or modified in this phase.
+No data is regenerated or modified.
 
-The objective is to answer the questions that pricing and actuarial teams ask
-*before* loss ratio modelling or rate changes:
+### Key questions
 
-- What is the portfolio made of?  
-  (product, channel, coverage composition)
-
-- How is premium distributed?  
-  (mean vs median, dispersion, tails, concentration)
-
-- Where does modelling effort matter most financially?
+- What is the portfolio composition?
+- Where is premium concentrated?
+- Which segments financially dominate the book?
 
 ### Key outputs
 
-✔ Portfolio mix diagnostics (product × channel × coverage)  
-✔ Premium dispersion and concentration analysis  
-✔ Tail contribution (top 1%, 5%, 10% of policies)  
-✔ Coverage → severity tail validation (P90 / P95 / P99)  
-✔ Explicit pricing design note (intentional weak risk differentiation)  
-✔ Leadership framing and portfolio steering implications  
+- Portfolio mix diagnostics  
+- Premium dispersion analysis  
+- Tail contribution analysis (top 1%, 5%, 10%)  
+- Coverage severity validation (P90/P95/P99)  
+- Pricing design note  
 
 ---
 
-## Phase 3 — Loss Ratio Drill-Down (Actuarial View) (v0.3)
+# Phase 3 — Loss Ratio Drill-Down (Actuarial View) (v0.3)
 
-Phase 3 introduces **actuarial loss ratio analysis** on the frozen synthetic portfolio,
-building directly on the pricing context established in Phase 2.
+Phase 3 introduces **earned premium–based loss ratio diagnostics**.
 
-The focus of this phase is **not model fitting** —  
-it is **profitability diagnosis and decision prioritisation** using
-earned premium logic and premium-weighted views.
-
-Loss ratios are treated as **decision signals**, not just summary metrics.
-
-### Key questions answered
-
-- Where is the portfolio **making or losing money**?
-- Which combinations of **product × channel** dominate financial risk?
-- Are adverse loss ratios driven by **frequency, severity, or exposure mix**?
-- Where would pricing, underwriting, or reinsurance review have the highest impact?
+The focus is **portfolio profitability diagnosis**, not predictive modelling.
 
 ### Key outputs
 
-✔ Earned premium–based loss ratio calculations  
-✔ Premium-weighted aggregation (financial materiality lens)  
-✔ Product × Channel loss ratio heatmap (executive view)  
-✔ Clear separation of **diagnosis** vs **modelling**  
-✔ Explicit decision framing for pricing and portfolio steering 
-
-## Phase 4 — Macro & CAT Scenario Sensitivity (Board View) (v0.4)
-
-Phase 4 extends the digital twin from *diagnosis* into **forward-looking stress testing
-and executive decision support**.
-
-This phase introduces a **scenario engine** that translates macroeconomic shocks and
-catastrophe events into portfolio-level paid loss impacts — both **gross** and **net of reinsurance**.
-
-The focus is **not forecasting**.
-It is understanding *exposure, sensitivity, and protection effectiveness* under stress.
+- Earned premium loss ratio calculations  
+- Premium-weighted aggregation  
+- Product × channel loss ratio heatmap  
+- Financial materiality prioritisation  
 
 ---
 
-### Key questions answered
+# Phase 4 — Macro & CAT Scenario Sensitivity (Board View) (v0.4)
 
-- How sensitive is the portfolio to **inflation, repair costs, unemployment, and CAT events**?
-- Which scenarios produce **material paid-loss uplift**?
-- Which products **drive the stress impact**?
-- How much risk is **absorbed by reinsurance**, and how much remains net?
-- Where does residual risk concentrate *after* QS + XL protection?
+Phase 4 extends the digital twin into **forward-looking stress testing**.
 
----
+Introduces a **scenario engine** translating macro shocks into paid-loss impacts.
 
 ### Key outputs
 
-✔ Scenario engine driven by macro and CAT shocks  
-✔ Portfolio-level paid loss impact (gross view)  
-✔ Product-level attribution of scenario uplift  
-✔ Bootstrap uncertainty bands for key stresses  
-✔ **Reinsurance effectiveness analysis (QS + XL)**  
-✔ Executive-ready board packs (PPT)  
-✔ **Interactive Streamlit scenario simulator** for live decision exploration  
+- Macro scenario engine  
+- CAT stress layer  
+- Portfolio gross vs net impact  
+- Reinsurance protection analysis  
+- Bootstrap uncertainty bands  
+- Executive board packs  
+- Interactive Streamlit scenario simulator  
 
 ---
 
-### Board artefacts
+# Phase 5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate) (v0.5)
 
-- `04_board_scenario_pack.pptx`  
-  *Gross portfolio impact under macro & CAT scenarios*
+Phase 5 introduces **formal modelling-readiness certification**.
 
-- `04_board_scenario_pack_with_RI.pptx`  
-  *Gross → Net view with QS + XL reinsurance protection*
-
-These decks are structured for **pricing, underwriting, and reinsurance committees**,
-not exploratory analysis.
-
----
-
-### Executive simulator (Streamlit)
-
-This phase also introduces an **interactive executive scenario tool**.
-
-Features:
-- Live sliders for:
-  - Inflation shock
-  - Repair cost shock
-  - Unemployment shift
-  - CAT year override
-- Reinsurance structure controls:
-  - Quota share %
-  - XL retention
-  - XL limit
-- Instant visibility of:
-  - Gross paid loss
-  - Net paid loss after RI
-  - Risk transfer efficiency
-  - Product-level attribution
-
-Location:
-- `notebooks/ui/scenario_simulator_exec_demo.py`
-
-Purpose:
-> Convert static board analysis into a **live decision conversation**.
-
----
-
-## Phase 5 — Anomaly Audit & Model Robustness (Modelling Readiness Gate) (v0.5)
-
-Phase 5 introduces a formal modelling-readiness certification layer on top of the frozen synthetic portfolio.
-
-This phase does not fit predictive models.
-
-Instead, it validates that the portfolio is structurally and statistically ready
-for controlled frequency modelling in the next phase.
-
-In regulated insurance environments, predictive modelling does not begin
-until exposure integrity, anomaly bounds, and distributional assumptions
-have been formally validated.
-
-Phase 5 mirrors that discipline.
-
----
-
-### Key questions answered
-
-- Is exposure derived correctly and free from structural inconsistencies?
-- Are anomalies rare, bounded, and explainable?
-- Does claim count exhibit statistically significant overdispersion?
-- Is Negative Binomial GLM justified over Poisson?
-- Is meaningful risk signal present across rating factors?
-- Is temporal leakage prevented before model fitting?
-
----
+Predictive models are not fitted yet — instead the dataset is audited.
 
 ### Key outputs
 
-✔ Exposure derivation from policy start and end dates  
-✔ Detection and controlled handling of non-positive exposure cases (~0.1%)  
-✔ Poisson dispersion testing (Pearson χ² / dof ≈ 88)  
-✔ Formal justification for Negative Binomial frequency modelling  
-✔ Risk signal validation across rating dimensions (e.g. vehicle_age)  
-✔ Fraud-like structural clustering diagnostics  
-✔ Temporal train/test split to prevent forward-looking bias  
-✔ Phase 5 modelling-readiness certification  
+- Exposure validation  
+- Controlled anomaly detection  
+- Poisson dispersion testing  
+- NB modelling justification  
+- Risk signal validation  
+- Temporal leakage protection  
 
 ---
 
-### Why this matters
+# Phase 6 — Technical Frequency Model (Negative Binomial GLM) (v0.6)
 
-Before fitting a GLM, pricing teams must ensure:
+Phase 6 introduces the **first predictive model** in the governed environment.
 
-- exposure is structurally consistent
-- statistical assumptions are defensible
-- risk differentiation exists in the data
-- modelling pipelines are leakage-safe
-
-Phase 5 ensures that the portfolio is not only analytically interesting,
-but statistically and procedurally ready for predictive modelling.
-
----
-
-## Phase 6 — Technical Frequency Model (Negative Binomial GLM) (v0.6)
-
-Phase 6 introduces the first predictive modelling layer within the governed digital twin architecture.
-
-This phase implements a Negative Binomial (NB2) claim frequency model, transitioning the project from modelling-readiness certification (Phase 5) into structured actuarial modelling.
-
-The objective is not simply to fit a model.
-
-It is to recover structured risk signal in a way that is:
-
-- statistically defensible
-- leakage-safe
-- commercially interpretable
-- deployable as rating factors
-
-This phase mirrors how regulated pricing teams formally introduce predictive modelling into a governed environment.
-
----
-
-### Key questions answered
-
-- Is Negative Binomial statistically justified over Poisson?
-- Does the portfolio exhibit recoverable and stable risk differentiation?
-- Can claim frequency be modelled per policy-year using exposure offsets?
-- Is fraud correctly separated from the technical pricing base?
-- Does the model demonstrate out-of-sample calibration and lift?
-- Are rating relativities implementable and stable?
-
----
+A **Negative Binomial GLM** is fitted for claim frequency.
 
 ### Key outputs
 
-✔ Negative Binomial GLM with log(exposure) offset  
-✔ Formal overdispersion validation (Poisson vs NB comparison)  
-✔ Fraud excluded from technical frequency base  
-✔ Temporal train/test split to prevent leakage  
-✔ Decile calibration and ~4.3× lift validation  
-✔ Vehicle age banding with monotonicity checks  
-✔ Structured pricing relativities (exp(beta))  
-✔ Exported deployment-ready artefacts  
-
----
-
-### Statistical validation
-
-The portfolio exhibits statistically significant overdispersion, formally justifying the NB2 distribution.
-
-The model demonstrates:
-- Strong out-of-sample risk separation
-- Stable predicted means across train/test
-- Calibration consistency across deciles
-- Economically interpretable segmentation
-Primary frequency drivers:
-- Product type (dominant differentiator)
-- Channel
-- Vehicle age bands
-
----
+- NB GLM with exposure offset  
+- Poisson vs NB overdispersion validation  
+- Temporal holdout validation  
+- Decile calibration and lift analysis  
+- Vehicle age monotonicity checks  
+- Pricing relativities export  
 
 ### Export artefacts
 
@@ -331,126 +206,39 @@ These artefacts mirror internal pricing workflows, where modelling outputs are c
 
 ---
 
-### Why this matters
+# Phase 7 — Fraud Overlay Architecture (v0.7)
 
-Phase 6 marks the transition from:
+Phase 7 introduces the **fraud detection control layer**.
 
-**Modelling readiness → Certified predictive pricing layer**
+Fraud modelling is treated as a **governance overlay**, not a standalone classifier.
 
-The digital twin now contains:
-- A distributionally justified frequency model
-- Governance-aligned exposure specification
-- Leakage-safe validation structure
-- Deployable rating relativities
-- All built on the frozen and validated dataset from Phase 1.
+### Key components
 
----
+### Fraud Propensity Model
 
-## Phase 7 — Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning) (v0.7)
+- Logistic regression  
+- Temporal holdout validation  
+- Isotonic calibration  
+- ROC-AUC ≈ 0.82  
 
-Phase 7 introduces the fraud analytics control layer within the Insurance Portfolio Digital Twin.
+### Structural Ring Detection
 
-This phase does not treat fraud as a standalone classification exercise.
+- Fraud clustering diagnostics  
+- Overlay integration (propensity + ring signal)  
+- Overlay lift ≈ 134×  
+- Shuffle validation  
 
-Instead, it implements a governance-aligned fraud overlay architecture that mirrors how regulated insurers operationalise fraud detection alongside pricing.
+### Operational Decision Layer
 
-The objective is not simply to maximise AUC.
+- SIU review optimisation  
+- Expected Value of Review (EVR)  
+- Capacity simulations  
 
-It is to:
+### Monitoring
 
-- detect structured fraud signal
-- separate pricing from fraud risk
-- optimise review decisions economically
-- validate structural robustness
-- introduce monitoring discipline
-
-This phase formally introduces a fraud control layer on top of the pricing architecture established in Phase 6.
-
----
-
-### Key questions answered
-
-- Can fraud propensity be modelled in a leakage-safe manner?
-- Does the portfolio exhibit recoverable fraud signal?
-- Is structural ring behaviour detectable and economically meaningful?
-- How much fraud value can SIU capture under capacity constraints?
-- What review threshold maximises net economic benefit?
-- Is the fraud model stable and explainable under governance standards?
-
----
-
-### Key components introduced
-
-#### 1️⃣ Fraud Propensity Model
-
-✔ Regularised Logistic Regression  
-✔ Temporal holdout validation  
-✔ Cross-validated isotonic calibration  
-✔ ROC-AUC ≈ 0.82  
-✔ PR-AUC validation for imbalanced data  
-✔ Baseline lift ≈ 39× (top vs bottom decile)
-
-Fraud is modelled independently from the technical pricing layer, preserving structural separation between pricing risk and fraud risk.
-
----
-
-#### 2️⃣ Structural Ring Detection & Overlay
-
-✔ Ring-level clustering diagnostics  
-✔ Fraud ratio estimation at ring level  
-✔ Overlay integration (propensity + ring signal)  
-✔ Overlay lift ≈ 134×  
-✔ Shuffle validation (overlay robustness test)
-
-This confirms that overlay performance is structural rather than accidental or leakage-driven.
-
----
-
-#### 3️⃣ Cost-Weighted Triage (SIU Decision Layer)
-
-Fraud scoring is extended into operational decisioning.
-
-Introduced:
-
-✔ Expected fraud loss estimation (paid + reserve proxy)  
-✔ Review cost incorporation  
-✔ Capacity simulation (review top X%)  
-✔ Net economic value estimation  
-✔ Threshold optimisation via EVR (Expected Value of Review)
-
-This transforms fraud modelling from predictive ranking into capital allocation logic.
-
----
-
-#### 4️⃣ EVR Sensitivity Analysis
-
-✔ Recovery-rate sensitivity testing  
-✔ Net value variation across assumptions  
-✔ Robustness validation of threshold policy
-
-Ensures that review strategy remains economically defensible under varying recovery conditions.
-
----
-
-#### 5️⃣ Drift Monitoring & Alerts
-
-✔ PSI-based fraud score monitoring  
-✔ Governance thresholds (warning / critical)  
-✔ Retraining trigger signalling
-
-Establishes first-pass model monitoring discipline consistent with production environments.
-
----
-
-#### 6️⃣ Interpretability Pack (SHAP)
-
-✔ Global SHAP feature importance  
-✔ Post-encoding feature name preservation  
-✔ Ranked importance export
-
-Supports model risk governance and executive transparency.
-
----
+- PSI drift monitoring  
+- Governance thresholds  
+- SHAP interpretability pack  
 
 ### Export artefacts
 
@@ -467,147 +255,215 @@ These artefacts mirror internal fraud governance workflows where scoring outputs
 
 ---
 
-### Why this matters
+# Phase 8 — Portfolio Scenario Simulator & Capital Stress Engine (v0.8)
 
-In regulated insurance environments, fraud modelling must answer:
+Phase 8 moves the Digital Twin beyond modelling into **portfolio decision simulation**.
 
-- Who should be reviewed?
-- How many claims can be reviewed?
-- What is the net economic value?
-- Is the signal structurally defensible?
-- Is the model stable under drift?
-- Is it explainable to governance committees?
+Instead of predicting claims, the system now evaluates:
 
-Phase 7 embeds fraud detection as a controlled overlay within the digital twin architecture.
+**How the entire insurance portfolio behaves under stress.**
 
-This marks the transition from:
+This phase introduces **stochastic portfolio risk simulation**, capital stress metrics, and executive-level risk reporting.
 
-**Predictive modelling → Operational fraud control framework**
+---
+
+## Scenario Simulation Engine
+
+A scenario framework translates macro and portfolio shocks into portfolio outcomes.
+
+Simulated stresses include:
+
+- claim frequency shocks  
+- severity inflation shocks  
+- fraud overlays  
+- catastrophe-style tail events  
+
+---
+
+## Stochastic Portfolio Loss Simulation
+
+Phase 8 introduces a **Monte Carlo collective risk model**.
+
+This produces a full **portfolio loss distribution** rather than point estimates.
+
+Outputs include:
+
+- expected loss  
+- percentile tail losses  
+- scenario loss distributions  
+
+---
+
+## Catastrophe Simulation Layer
+
+Low-probability, high-severity shocks are introduced to shape the **right tail of portfolio risk**.
+
+This better reflects how insurers evaluate capital exposure under extreme scenarios.
+
+---
+
+## Capital Stress Metrics
+
+Capital stress metrics now include:
+
+- Expected loss  
+- 99% portfolio loss  
+- **99.5% Solvency-style tail loss**  
+- Capital required proxy  
+- Solvency ratio proxy  
+
+---
+
+## Exceedance Probability (EP) Curve
+
+Phase 8 introduces **catastrophe-style exceedance curves** used in Solvency II and Lloyd’s risk modelling.
+
+Outputs include:
+
+- probability exceedance curve  
+- **return period EP curve (1-in-100, 1-in-200)**  
+- tail risk diagnostics  
+
+---
+
+## Pricing Response Simulation
+
+A pricing simulation layer evaluates how rate changes affect:
+
+- portfolio loss ratios  
+- premium volume  
+- profitability  
+
+Customer behaviour is incorporated using **pricing elasticity assumptions**.
+
+---
+
+## Portfolio Strategy Simulation
+
+The Digital Twin can simulate how strategic actions affect portfolio economics.
+
+Examples:
+
+- targeted rate increases  
+- fraud mitigation impact  
+- capital stress mitigation  
+
+---
+
+## Executive Risk Dashboard
+
+Phase 8 produces board-level artefacts summarising portfolio risk:
+
+- loss distribution  
+- inflation sensitivity  
+- capital adequacy  
+- EP curve tail risk  
+
+These outputs mirror how risk analytics is presented to:
+
+- pricing committees  
+- risk committees  
+- executive leadership  
+
+---
+
+### Export artefacts
+
+Phase 8 produces structured outputs under: `outputs/phase8/`
+
+- `scenario_summary.csv`
+- `loss_distribution_mc.csv`
+- `phase8_capital_metrics.json`
+- `phase8_ep_metrics.json`
+- `phase8_exec_report.txt`
+- `phase8_governance_checks.json`
+- `phase8_portfolio_risk_dashboard.png`
+- `phase8_portfolio_risk_dashboard.png`
+- `phase8_ep_curve.png`
+
+### Example Outputs
+
+The system produces artefacts similar to those used in insurer risk committees and pricing discussions.
+
+Example visual outputs include:
+
+- Portfolio loss distribution under stochastic simulation
+- Inflation sensitivity analysis
+- Portfolio capital adequacy diagnostics
+- Catastrophe-style exceedance probability curves
+- Executive portfolio risk dashboard
+
+These outputs mirror how portfolio analytics is communicated to:
+
+- Pricing committees
+- Risk management teams
+- Executive leadership
 
 ---
 
 ### Notebooks
 
-- `00_data_gen_validation.ipynb` — generator sanity checks & governance gates  
-- `01_eda_frozen_synthetic_universe.ipynb` — actuarial realism validation  
-- `02_portfolio_mix_premium_pricing_context.ipynb` — pricing context on frozen data
-- `03_loss_ratio_drilldown_actuarial.ipynb` —  Actuarial loss ratio drill-down using earned premium logic, with
-  executive-ready visualisation and governance anchoring.
-- `04_macro_cat_sensitivity.ipynb` — Scenario engine, macro sensitivities, CAT stress, uncertainty bands, and RI impact
-- `05_anomaly_audit_and_model_robustness.ipynb` — Exposure validation, anomaly diagnostics, dispersion testing, risk signal stability checks, and modelling-readiness certification.
-- `06_frequency_model_nb_glm_risk_signal_recovery.ipynb` — Negative Binomial frequency model with exposure offset, calibration, lift validation, monotonicity audit, and pricing-ready relativities export.
-- `07_fraud_model_overlay_and_ring_detection.ipynb` —  
-  Fraud propensity modelling, cross-validated calibration, lift analysis,
-  ring overlay integration, EVR optimisation, SIU capacity simulation,
-  drift monitoring, SHAP interpretability, and governance export pack.
 
-All built on **frozen, governed data** from Phase 1.
+- `00_data_gen_validation.ipynb`
+- `01_eda_frozen_synthetic_universe.ipynb`
+- `02_portfolio_mix_premium_pricing_context.ipynb`
+- `03_loss_ratio_drilldown_actuarial.ipynb`
+- `04_macro_cat_sensitivity.ipynb`
+- `05_anomaly_audit_and_model_robustness.ipynb`
+- `06_frequency_model_nb_glm_risk_signal_recovery.ipynb`
+- `07_fraud_model_overlay_and_ring_detection.ipynb`
+- `08_portfolio_scenario_simulator_capital_stress.ipynb`
+
+Interactive simulator:
+
+`notebooks/ui/scenario_simulator_exec_demo.py`
+
+All analysis is built on **frozen governed data from Phase 1**.
 
 ---
 
-## Repository structure
+# Repository Structure
+
 
 insurance-digital-twin/
 
-├── data_gen/
+data_gen/
+        config.py
+        generators.py
+        schemas.py
+        cli.py
 
-│ ├── config.py # Portfolio assumptions & targets
+data/
+raw/
+    dataset_manifest.json
 
-│ ├── generators.py # Synthetic data generation logic
+notebooks/
+          00_data_gen_validation.ipynb
+          01_eda_frozen_synthetic_universe.ipynb
+          02_portfolio_mix_premium_pricing_context.ipynb
+          03_loss_ratio_drilldown_actuarial.ipynb
+          04_macro_cat_sensitivity.ipynb
+          05_anomaly_audit_and_model_robustness.ipynb
+          06_frequency_model_nb_glm_risk_signal_recovery.ipynb
+          07_fraud_model_overlay_and_ring_detection.ipynb
+          08_portfolio_scenario_simulator_capital_stress.ipynb
 
-│ ├── schemas.py # Entity schemas (documentation & typing)
-
-│ └── cli.py # Dataset generation + freeze entry point
-
-│
-
-├── data/
-
-│ └── raw/
-
-│ └── dataset_manifest.json # Dataset hashes + metadata
-
-├── notebooks/
-
-│ ├── 00_data_gen_validation.ipynb
-
-│ ├── 01_eda_frozen_synthetic_universe.ipynb
-
-│ ├── 02_portfolio_mix_premium_pricing_context.ipynb
-
-│ └── 03_loss_ratio_drilldown_actuarial.ipynb
-
-│ ├── 04_macro_cat_sensitivity.ipynb  
-
-│ └── ui/  
-
-│     └── scenario_simulator_exec_demo.py  
-
-│ └── 05_anomaly_audit_and_model_robustness.ipynb
-
-│ └── 06_frequency_model_nb_glm_risk_signal_recovery.ipynb
-
-│ └── 07_fraud_model_overlay_and_ring_detection.ipynb
-
-└── README.md
-
+notebooks/ui/
+              scenario_simulator_exec_demo.py
 
 ---
 
-## How to run
+# How to Run
 
-### Phase 1 — Generate & freeze dataset
+Generate the dataset:
 
 ```bash
 python -m data_gen.cli
+```bash
 
-```
+Then run the notebooks sequentially.
 
-This produces a **frozen dataset** with a versioned manifest and cryptographic hashes.
-
-**Phase 2 — Pricing context analysis**
-
-Open and run:
-
-- notebooks/02_portfolio_mix_premium_pricing_context.ipynb
-
-**Phase 3 — Loss Ratio Drill-Down**
-
-Open and run:
-
-- notebooks/03_loss_ratio_drilldown_actuarial.ipynb
-
-**Phase 4 — Macro & CAT Scenario Sensitivity (Board View)**
-
-Open and run:
-
-- notebooks/04_macro_cat_sensitivity.ipynb
-
-(Optional interactive demo)
-
-- notebooks/ui/scenario_simulator_exec_demo.py
-
-They consume the frozen outputs from Phase 1.
-
-**Phase 5 - Anomaly Audit & Model Robustness (Modelling Readiness Gate)**
-
-Open and run:
-
-- notebooks/05_anomaly_audit_and_model_robustness.ipynb
-
-**Phase 6 - Technical Frequency Model (NB GLM)**
-
-Open and run:
-
-- notebooks/06_frequency_model_nb_glm_risk_signal_recovery.ipynb
-
-**Phase 6 - Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning)**
-
-Open and run:
-
-- notebooks/07_fraud_model_overlay_and_ring_detection.ipynb
-
-⚠️ Phase 2, 3, 4, 5, 6 & 7 **do not regenerate data.**
+⚠️ Phase 2-8 **do not regenerate data.**
 ---
 
 ## Releases
@@ -619,15 +475,20 @@ Open and run:
 - **v0.5 — Anomaly Audit & Modelling Readiness**
 - **v0.6 — Technical Frequency Model (NB GLM)**
 - **v0.7 — Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning)**
+- **v0.8 — Portfolio Scenario Simulator & Capital Stress Engine**
 
 ---
 
 ## **What’s next**
 
-**v0.8 — Scenario Simulator (Inflation Shock + Capital Stress Layer)**
+**v0.9 — GenAI Executive Insight Engine**
 
-- Inflation shock sliders  
-- Frequency + severity stress propagation  
-- Fraud-adjusted stress view  
-- Gross → net capital translation  
-- Executive auto-summary integration
+The next phase will introduce automated executive reporting.
+
+Capabilities will include:
+
+- GenAI auto-generated portfolio insights 
+- Natural-language scenario summaries 
+- Risk interpretation for leadership audiences 
+- Board-ready analytics reports 
+- Executive auto-summary integration 
