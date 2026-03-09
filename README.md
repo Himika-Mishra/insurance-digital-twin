@@ -459,7 +459,7 @@ Generate the dataset:
 
 ```bash
 python -m data_gen.cli
-```bash
+```
 
 Then run the notebooks sequentially.
 
