@@ -401,6 +401,203 @@ These outputs mirror how portfolio analytics is communicated to:
 
 ---
 
+# Phase 9 — Executive Intelligence Platform (v0.9)
+
+Phase 9 transforms the Digital Twin from a **risk simulation system** into a **decision intelligence platform**.
+
+The focus shifts from:
+
+> “What is the risk?”
+
+to:
+
+> **“What should leadership do next?”**
+
+---
+
+## Executive Decision Layer
+
+Phase 9 introduces a structured **AI-driven decision system**, designed to replicate how:
+
+- pricing committees 
+- risk committees 
+- executive leadership 
+
+interrogate portfolio performance.
+
+The system produces **deterministic, structured outputs**, not free-form text.
+
+Each query returns:
+
+- decision 
+- reasoning 
+- supporting evidence 
+
+---
+
+## Multi-Agent Decision Architecture
+
+The platform implements a **specialised multi-agent reasoning system**, including:
+
+- **Risk Agent** 
+  Identifies portfolio concentration, segment-level exposure, and drivers of loss 
+- **Capital Agent** 
+  Evaluates solvency adequacy using tail risk (99.5%) and capital position 
+- **Strategy Agent** 
+  Recommends pricing and underwriting actions linked directly to capital pressure 
+- **Scenario Agent** 
+  Assesses macro stress propagation (inflation, frequency, fraud) 
+- **Governance Agent** 
+  Validates modelling readiness, data integrity, and control thresholds 
+
+A routing layer ensures that each question is handled by the appropriate specialist agent. 
+
+---
+
+## Structured Decision Output
+
+Unlike typical GenAI implementations, outputs are constrained to a **decision protocol:**
+``` json
+{
+  "decision": "...",
+  "reasoning": ["...", "..."],
+  "evidence": { ... }
+}
+```
+
+This mirrors how analytical outputs are communicated in:
+- board papers 
+- pricing reviews 
+- capital committees 
+
+---
+
+## RAG (Retrieval-Augmented Decisioning)
+
+Phase 9 introduces a **lightweight RAG layer**.
+
+The decision system retrieves context from:
+
+- Phase 6 modelling outputs 
+- Phase 8 capital & EP metrics 
+- governance checks 
+- scenario summaries 
+- strategy recommendations 
+
+This ensures decisions are:
+
+- grounded in portfolio data 
+- reproducible 
+- auditable 
+
+---
+
+## Interactive Executive Cockpit (Streamlit)
+
+A production-style **Streamlit application** is introduced.
+
+The cockpit enables:
+
+**Live Scenario Simulation** 
+- inflation shock 
+- frequency shock 
+- fraud multiplier 
+- capital availability 
+
+These inputs dynamically recompute:
+
+- portfolio loss 
+- EP curve tail 
+- solvency ratio 
+
+---
+
+## Real-Time Decision Intelligence
+
+The AI system operates on **live scenario inputs**, not static outputs.
+
+Example queries:
+
+- Is the portfolio adequately capitalised? 
+- Where should leadership focus first? 
+- What pricing action should we take? 
+- What scenario creates maximum capital strain? 
+
+Each response includes:
+
+- structured decision 
+- reasoning chain 
+- supporting evidence 
+- relevant portfolio context 
+
+---
+
+## Macro → Capital → Strategy Linkage
+
+Phase 9 explicitly connects:
+
+- macro factors → severity & frequency 
+- loss → EP curve tail 
+- tail risk → capital requirement 
+- capital pressure → pricing strategy 
+
+This creates a **closed-loop decision system,** rather than isolated analytics.
+
+---
+
+## Executive Outputs
+
+Phase 9 produces:
+
+- Executive decision outputs (AI-generated) 
+- Board-level commentary 
+- Scenario-aware capital diagnostics 
+- Strategy recommendations linked to capital 
+- Interactive decision cockpit 
+
+---
+
+## Export Artefacts
+
+Phase 9 produces structured outputs under: `outputs/phase9/`
+
+- `phase9_exec_payload.json` 
+- `phase9_rag_documents.json` 
+- `phase9_board_summary.txt` 
+- `phase9_decision_logs.json` 
+
+---
+
+## Notebooks & UI
+
+- `09_executive_intelligence_platform.ipynb` 
+- `notebooks/ui/executive_cockpit_streamlit.py` 
+
+---
+
+## What Phase 9 Changes
+
+Previous phases answered:
+
+- What is happening?
+- What could happen?
+
+Phase 9 answers:
+
+> **What should we do about it?**
+
+---
+
+## System Positioning
+
+This phase positions the project as:
+
+- a **pricing decision system** 
+- a **capital-aware analytics engine** 
+- an **insurance digital twin of the pricing function** 
+
+---
+
 ### Notebooks
 
 
@@ -412,7 +609,8 @@ These outputs mirror how portfolio analytics is communicated to:
 - `05_anomaly_audit_and_model_robustness.ipynb`
 - `06_frequency_model_nb_glm_risk_signal_recovery.ipynb`
 - `07_fraud_model_overlay_and_ring_detection.ipynb`
-- `08_portfolio_scenario_simulator_capital_stress.ipynb`
+- `08_portfolio_scenario_simulator_capital_stress.ipynb` 
+- `09_exec_intelligence_layer.ipynb` 
 
 Interactive simulator:
 
@@ -447,6 +645,10 @@ notebooks/
           06_frequency_model_nb_glm_risk_signal_recovery.ipynb
           07_fraud_model_overlay_and_ring_detection.ipynb
           08_portfolio_scenario_simulator_capital_stress.ipynb
+          09_exec_intelligence_layer.ipynb
+          09_streamlit_app.py
+          phase9_core.py
+
 
 notebooks/ui/
               scenario_simulator_exec_demo.py
@@ -463,7 +665,7 @@ python -m data_gen.cli
 
 Then run the notebooks sequentially.
 
-⚠️ Phase 2-8 **do not regenerate data.**
+⚠️ Phase 2-9 **do not regenerate data.**
 ---
 
 ## Releases
@@ -476,6 +678,7 @@ Then run the notebooks sequentially.
 - **v0.6 — Technical Frequency Model (NB GLM)**
 - **v0.7 — Fraud Overlay Architecture (Lift + Ring Detection + SIU Decisioning)**
 - **v0.8 — Portfolio Scenario Simulator & Capital Stress Engine**
+- **v0.9 — Executive Intelligence Platform**
 
 ---
 
