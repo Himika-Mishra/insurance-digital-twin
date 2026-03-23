@@ -684,14 +684,4 @@ Then run the notebooks sequentially.
 
 ## **What’s next**
 
-**v0.9 — GenAI Executive Insight Engine**
-
-The next phase will introduce automated executive reporting.
-
-Capabilities will include:
-
-- GenAI auto-generated portfolio insights 
-- Natural-language scenario summaries 
-- Risk interpretation for leadership audiences 
-- Board-ready analytics reports 
-- Executive auto-summary integration 
+**TBD**
